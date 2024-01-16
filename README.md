@@ -31,7 +31,11 @@ Checkout the <a href="https://microchipsupport.force.com/s/" target="_blank">Tec
 
 ## 1. Introduction<a name="step1">
 
-This application demonstrates the L2 Bridging feature. PIC32MZW1/WFI32E set as an AP can be used as a Wireless Bridge connecting multiple wireless and wired networks to form a single network.
+This application enables us to develop a Wi-Fi and 10BaseT1S bridge in WFI32 Curiosity board. Bridging function connects two separate networks as if they were a single network. In the OSI model, bridging is performed in the data link layer (layer 2). Bridging is independent of IP addresses. With one or more wireless segments in the bridged network, the device can be called a wireless bridge. The L2 bridging implementation is according to the IEEE 802.1D - 2004 standard document. It is recommended to read the standard to understand the purpose and implementation of the software module.
+
+![](Docs/bridging.png)
+
+WFI32 Curiosity Board set as an AP can be used as a Wireless Bridge connecting multiple wireless and wired networks to form a single network. Here a Wi-Fi and 10BaseT1S bridge is created using L2 bridging.
 
 ![](Docs/Setup.PNG)
 
@@ -159,77 +163,3 @@ Follow the steps provided in the link to [Build and program the application](htt
 
 ### To configure the RNBD Remote module
 
-- Power the RNBD451 Add-on board via external supply and place the Power select Jumper accordingly.
-- Connect RNBD Add-on board to your Mobile phone using a C type cable.
-- Follow the below steps to configure the remote module
-
-**Step 1** – Enter command mode
-
-- Input Command: $$$
-
-- Expected response:CMD>
-
-**Step 2** – Set to Factory defaults
-
-- Input Command:SF,1<CR><LF>
-
-- Expected response: Reboot after Factory Reset<CR><LF>
-
-- %REBOOT%
-
-**Step 3** – Enter command mode
-
-- Input Command: $$$
-
-- Expected response: CMD>
-
-**Step 4** – Set name of module to "Remote"
-
-- Input Command:SN,Remote<CR><LF>
-
-- Expected response : AOK<CR><LF>
-
-- CMD>
-
-**Step 5** – Enable device information and transparent and UART operation
-
-- Input Command: SS,C0<CR><LF>
-
-- Expected response : AOK<CR><LF>
-
-- CMD>
-
-**Step 6** – Enable authentication/security
-
-- Input Command:SA,2,<CR><LF>
-
-- Expected response: AOK<CR><LF>
-
-- CMD>
-
-**Step 7** – Set 4 digit PIN code
-
-- Input Command:SP,1234<CR><LF>
-
-- Expected response: AOK<CR><LF>
-
-- CMD>
-
-**Step 8** – Save and reboot
-
-- Input Command:R,1<CR><LF>
-
-- Expected response: Rebooting<CR><LF>
-
-- %REBOOT%
-	
-![](Docs/Remote_setup.gif)
-
-
-### To configure the RNBD Master module
-
-- Once the Remote module is configured, Connect the SAMD21 Curiosity Nano Master setup.
-- Enter "D" command on the remote module to get the MAC ID of the Remote command.
-- Enter this Mac ID in "main.c" in line42 and program the SAMD21 Curiosity Nano Master setup. After it initialises and enters into RMT mode(Remote command Mode) and a motion is detected the LED connected to the Remote module is  toggled.
-
-![](Docs/RNBD_Demo.gif)
