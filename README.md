@@ -44,11 +44,9 @@ WFI32 Curiosity Board set as an AP can be used as a Wireless Bridge connecting m
 
 | TOOLS | QUANTITY |
 | :- | :- |
-| [RNBD451 Add On Board](https://www.microchip.com/en-us/development-tool/ev25f14a#:~:text=The%20RNBD451%20Add%20On%20Board,%E2%84%A2%20Add%20On%20Bus%20Standard.) | 2 |
-| [CURIOSITY NANO BASE FOR CLICK BOARDS](https://www.microchip.com/en-us/development-tool/ac164162) | 1 |
-| [MOTION 4 Click Board](https://www.mikroe.com/motion-4-click) | 1 |
-| [SAM D21 CURIOSITY NANO EVALUATION KIT](https://www.microchip.com/en-us/development-tool/dm320119) | 1 |
-| [RGB LED](https://robu.in/product/smd-3-color-led-module/?gclid=CjwKCAjwnOipBhBQEiwACyGLug8P2eCIRrBCrqG8vFfO2SSnP1c16q9UcsoS562nDKz1k9rgzWT0sBoCbZsQAvD_BwE) | 1 |
+| [PIC32 WFI32E Curiosity Board](https://www.microchip.com/en-us/development-tool/ev12f11a) | 1 |
+| [EVB-LAN8670-RMII](https://www.microchip.com/en-us/development-tool/EV06P90A) | 2 |
+| [SAM E54 CURIOSITY ULTRA DEVELOPMENT BOARD](https://microchip.com/en-us/development-tool/dm320210) | 1 |
 
 ## 3. Software Setup<a name="step3">
 
@@ -56,26 +54,36 @@ WFI32 Curiosity Board set as an AP can be used as a Wireless Bridge connecting m
 
     - Version: 6.15
 	- XC32 Compiler v4.10
-	- MPLAB® Code Configurator v5.3.7
-	- SAMD21_DFP v3.6.144
+	- MPLAB® Code Configurator v5.4.1
+	- PIC32MZ-W_DFP v1.8.326
 	- MCC Harmony
 	  - csp version: v3.18.0
 	  - dev_packs: v3.18.0
-	  - wireless_rnbd: v2.0.0
+	  - net_10base_t1s: vv1.3.0
+	  - wireless_wifi: v3.9.1
+	  - wireless_system_pic32mzw1_wfi32e01: v3.8.0
+	  - wolfssl: v5.4.0
+	  - net: v3.10.1
+	  - crypto: v3.8.1
+	  - CMSIS-FreeRTOS: v10.5.1
+	  - core version: v3.13.1
 
 - Any Serial Terminal application like [TERA TERM](https://download.cnet.com/Tera-Term/3000-2094_4-75766675.html) terminal application
 
 - [MPLAB X IPE v6.10](https://microchipdeveloper.com/ipe:installation)
 
-- [Microchip Bluetooth Data (MBD app)](https://play.google.com/store/apps/details?id=com.microchip.bluetooth.data&hl=en&gl=US)
-
-- Any Android terminal application like [Serial USB Terminal](https://play.google.com/store/apps/details?id=de.kai_morich.serial_usb_terminal)
-
 
 ## 4. Hardware Setup<a name="step4">
 
-- Connect the LAN867x Phy daughter board on the WFI32 Curiosity board ethernet phy module socket.
--  
+- Computer connected to [WFI32 Curiositiy board](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/EV12F11A) over USB POWER (J204)
+- J202 = VBUS
+- J301 = open
+
+USB-to-UART cable between the computer and GPIO Header UART1 pins (Rx, GND, Tx) to observe the console logs.
+
+- LAN867x PHY Daughter Board plugged in WFI32 Cursiotiy Board through J208.
+- LAN867x PHY Daughter Board plugged in SAME54 Cursiotiy Ultra Board through J802.
+- Establish a physical wiring between the two 10BASE-T1S nodes. 
 
 ## 5. Harmony MCC Configuration<a name="step5">
 
@@ -135,17 +143,19 @@ WFI32 Curiosity Board set as an AP can be used as a Wireless Bridge connecting m
 ![](Docs/PIN_config.PNG)
 
 **Step 4** - [Generate](https://onlinedocs.microchip.com/pr/GUID-A5330D3A-9F51-4A26-B71D-8503A493DF9C-en-US-1/index.html?GUID-9C28F407-4879-4174-9963-2CF34161398E) the code.
- 
-**Step 5** - Copy the mentioned files from this repository by navigating to the location mentioned below and paste it your project folder. 
 
-| Note | This application repository should be cloned/downloaded to perform the following steps. |
-| :- | :- |
-| Path | firmware/src |
+**Step 5** - Clean and build the project. To run the project, select "Make and program device" button.
 
-- Copy the "rnbd" folder, and "main.c" which can be found by navigating to the following path: "...\firmware\src"
-- Paste the folder under source files in your project folder (...\firmware\src).
+### Getting started with 10BaseT1S application in SAME54 Curiositiy Ultra Board.
 
-**Step 6** - Clean and build the project. To run the project, select "Make and program device" button.
+- Open the 10BaseT1S application(freeRTOS) available in this [link](https://github.com/Microchip-MPLAB-Harmony/net_10base_t1s/tree/master/apps/tcpip_iperf_lan867x/firmware).
+- Open MCC configurator. Go to Driver layer view and select Mac Instance 0 in Netconfig and make the changes as shown below.
+
+![](Docs/SAME54_MAC.PNG)
+
+- Select LAN867x component, expand PLCA settings and make sure the Node Id is set as 1.
+- [Generate](https://onlinedocs.microchip.com/pr/GUID-A5330D3A-9F51-4A26-B71D-8503A493DF9C-en-US-1/index.html?GUID-9C28F407-4879-4174-9963-2CF34161398E) the code.
+- Clean and build the project. To run the project, select "Make and program device" button.
 
 ## 6. Board Programming<a name="step6">
 
@@ -161,5 +171,25 @@ Follow the steps provided in the link to [Build and program the application](htt
 
 ## 7. Run the demo<a name="step7">
 
-### To configure the RNBD Remote module
+- Make sure that Node Id, IP Addresses and MAC Addresses of the two nodes are different.
+- Press the Reset button on both the devices.
+- Type netinfo in the terminal window and check your network information(Make sure the status is ready). 
+- Connect your Laptop to the WFI32 AP using the SSID and password displayed in the Terminal application.
 
+![](Docs/Reset.PNG)
+
+- Open Command line in your laptop and enter "ipconfig /all"
+
+![](Docs/ipconfig.PNG)
+ 
+- Type ping <Ip address of SAME54 node> in the terminal window.
+
+![](Docs/Ping.PNG)
+
+You should get a reply for your request if the Wi-Fi 10BaseT1S Bridge was established. 
+- Create an IPERF UDP server on one node; type iperf -s -u in the iperf application in your Laptop. Make sure you use Iperf v2 for this example.
+- Create an IPERF UDP client on the SAME54 node; type iperf -c <ip address assigned to the laptop> -u -b 10M in the terminal window.
+
+![](Docs/IPERF.PNG)
+
+- You have successfully achieved a 9.328 Mbps throughput on the Wi-Fi and 10BASE-T1S Bridge application.
