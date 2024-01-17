@@ -31,14 +31,15 @@ Checkout the <a href="https://microchipsupport.force.com/s/" target="_blank">Tec
 
 ## 1. Introduction<a name="step1">
 
-This application enables us to develop a Wi-Fi and 10BaseT1S bridge in WFI32 Curiosity board. Bridging function connects two separate networks as if they were a single network. In the OSI model, bridging is performed in the data link layer (layer 2). Bridging is independent of IP addresses. With one or more wireless segments in the bridged network, the device can be called a wireless bridge. The L2 bridging implementation is according to the IEEE 802.1D - 2004 standard document. It is recommended to read the standard to understand the purpose and implementation of the software module.
+This application enables us to develop a Wi-Fi and 10BaseT1S bridge in WFI32 Curiosity board. Bridging function connects two separate networks as if they were a single network. In the OSI model, bridging is performed in the data link layer (layer 2).With one or more wireless segments in the bridged network, the device can be called a wireless bridge.
 
 ![](Docs/bridging.png)
 
-WFI32 Curiosity Board set as an AP can be used as a Wireless Bridge connecting multiple wireless and wired networks to form a single network. Here a Wi-Fi and 10BaseT1S bridge is created using L2 bridging.
+ The L2 bridging implementation is according to the IEEE 802.1D - 2004 standard document. It is recommended to read the standard to understand the purpose and implementation of the software module. For more information please go through this [application](https://github.com/MicrochipTech/PIC32MZW1_Ethernet_WIFI_Bridge).
 
 ![](Docs/Setup.PNG)
 
+WFI32 Curiosity Board set as an AP can be used as a Wireless Bridge connecting multiple wireless and wired networks to form a single network. Here a Wi-Fi and 10BaseT1S bridge is created using L2 bridging.
 
 ## 2. Bill of materials<a name="step2">
 
