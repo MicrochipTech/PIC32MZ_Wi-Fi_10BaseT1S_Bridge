@@ -1,11 +1,11 @@
-# PIC32MZ_Wi-Fi_10BaseT1S_Bridge
+# PIC32MZ Wi-Fi 10BaseT1S Bridge
 
 <img src="Docs/IoT-Made-Easy-Logo.png" width=100>
 
 
 > "IoT Made Easy!" 
 
-Devices: **| RNBD451 |**<br>
+Devices: **| WFI32 | SAME54 | LAN867x |**<br>
 Features: **| Wi-Fi | 10BaseT1S |**
 
 
@@ -84,7 +84,7 @@ USB-to-UART cable between the computer and GPIO Header UART1 pins (Rx, GND, Tx) 
 
 - LAN867x PHY Daughter Board plugged in WFI32 Cursiotiy Board through J208.
 - LAN867x PHY Daughter Board plugged in SAME54 Cursiotiy Ultra Board through J802.
-- Establish a physical wiring between the two 10BASE-T1S nodes. 
+- Establish a physical wiring between the two PN ports of the LAN867x 10BASE-T1S nodes. The P port of the LAN867x node in WFI32 board should be connected to the P port of the LAN867x node in SAME54 board and similarly for the N port.
 
 ## 5. Harmony MCC Configuration<a name="step5">
 
@@ -188,9 +188,9 @@ Follow the steps provided in the link to [Build and program the application](htt
 ![](Docs/Ping.PNG)
 
 You should get a reply for your request if the Wi-Fi 10BaseT1S Bridge was established. 
-- Create an IPERF UDP server on one node; type iperf -s -u in the iperf application in your Laptop. Make sure you use Iperf v2 for this example.
-- Create an IPERF UDP client on the SAME54 node; type iperf -c <ip address assigned to the laptop> -u -b 10M in the terminal window.
+- Create an IPERF UDP server on one node; type "iperf -s" in the iperf application in your Laptop. Make sure you use Iperf v2 for this example.
+- Create an IPERF UDP client on the SAME54 node; type "iperf -c <ip address assigned to the laptop> -u -b 10M" in the terminal window.
 
 ![](Docs/IPERF.PNG)
 
-- You have successfully achieved a 9.328 Mbps throughput on the Wi-Fi and 10BASE-T1S Bridge application.
+- 9.328 Mbps throughput has been observed on the 10BASE-T1S Bridge and Wi-Fi application.
