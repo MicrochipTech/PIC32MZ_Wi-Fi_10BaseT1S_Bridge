@@ -82,8 +82,8 @@ WFI32 Curiosity Board set as an AP can be used as a Wireless Bridge connecting m
 
 USB-to-UART cable between the computer and GPIO Header UART1 pins (Rx, GND, Tx) to observe the console logs.
 
-- LAN867x PHY Daughter Board plugged in WFI32 Cursiotiy Board through J208.
-- LAN867x PHY Daughter Board plugged in SAME54 Cursiotiy Ultra Board through J802.
+- LAN867x PHY Daughter Board plugged in WFI32 Curiosity Board through J208.
+- LAN867x PHY Daughter Board plugged in SAME54 Curiosity Ultra Board through J802.
 - Establish a physical wiring between the two PN ports of the LAN867x 10BASE-T1S nodes. The P port of the LAN867x node in WFI32 board should be connected to the P port of the LAN867x node in SAME54 board and similarly for the N port.
 
 ## 5. Harmony MCC Configuration<a name="step5">
